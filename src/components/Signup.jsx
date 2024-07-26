@@ -1,115 +1,157 @@
-import React from 'react'
-// import video from '../assets/video.mp4';
-// import '../style/signup.css'
-import { Button, Container, FormControl, Grid, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
+import React from 'react';
+import { Button, Container, Grid, TextField, Typography, MenuItem, Select, FormControl, InputLabel, Box } from '@mui/material';
+
 const textFieldStyles = {
-    '& .MuiFilledInput-root': {
+  '& .MuiFilledInput-root': {
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    '&:hover': {
       backgroundColor: 'rgba(255, 255, 255, 0.4)',
-      '&:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-      },
-      '&.Mui-focused': {
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-      },
     },
-    '& .MuiFilledInput-underline:before': {
-      borderBottomColor: 'rgba(255, 255, 255, 0.6)', 
+    '&.Mui-focused': {
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
     },
-    '& .MuiFilledInput-underline:after': {
-      borderBottomColor: 'light blue', 
-    },
-    '& .MuiInputLabel-root': {
-      color: 'white',
-    },
-    '& .MuiInputLabel-root.Mui-focused': {
-      color: 'black',
-    },
-  };
+  },
+  '& .MuiFilledInput-underline:before': {
+    borderBottomColor: 'rgba(255, 255, 255, 0.6)',
+  },
+  '& .MuiFilledInput-underline:after': {
+    borderBottomColor: 'black',
+  },
+  '& .MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: 'white',
+  },
+};
+
+const containerStyle = {
+  height: '100vh',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  paddingBottom: '20px',
+};
+
+const formStyle = {
+  width: '100%',
+  maxWidth: '400px',
+  padding: '30px',
+  borderRadius: '20px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+  backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  color: 'white',
+  zIndex: '1',
+  backdropFilter: 'blur(100px) brightness(300%)',
+};
+
 const Signup = () => {
   return (
     <div>
-       {/* <video autoPlay muted loop id="background-video">
-        <source src={video}type="video/mp4" />
-        Your browser does not support the video tag.
-            </video>
-          <div className="overlay"></div>  */}
-          <Container style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',paddingBottom:'10px'}} >
-          <form
-          style={{
-                        
-                   width: '100%',
-                  maxWidth: '400px',
-                  padding: '30px',
-                        borderRadius: '20px',
-                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                        color: 'white',
-                        zIndex: '1',
-                        backdropFilter: 'blur(100px) brightness(300%)',
-                       overflow: 'hidden',
-                        padding:'40px'
-                       
-                  }}>
-                  <Grid container spacing={2} justifyContent="center">
-                  <Grid item xs={12} md={12} sm={12} lg={12}>
-                  <Typography variant="h4" align="center" gutterBottom>
-            Create Account
+      <Container style={containerStyle}>
+        <form style={formStyle}>
+          <Grid container spacing={2} justifyContent="center">
+            <Grid item xs={12}>
+              <Typography variant="h3" align="center" gutterBottom>
+                Sign Up
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                label="Name"
+                variant="filled"
+                fullWidth
+                style={{ marginBottom: '10px' }}
+                sx={textFieldStyles}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="email"
+                label="Email"
+                variant="filled"
+                fullWidth
+                style={{ marginBottom: '10px' }}
+                sx={textFieldStyles}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="password"
+                label="Password"
+                variant="filled"
+                fullWidth
+                style={{ marginBottom: '10px' }}
+                sx={textFieldStyles}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="password"
+                label="Confirm Password"
+                variant="filled"
+                fullWidth
+                style={{ marginBottom: '10px' }}
+                sx={textFieldStyles}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                label="Phone Number"
+                variant="filled"
+                fullWidth
+                style={{ marginBottom: '10px' }}
+                sx={textFieldStyles}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                type="text"
+                label="Address"
+                variant="filled"
+                fullWidth
+                style={{ marginBottom: '10px' }}
+                sx={textFieldStyles}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <FormControl variant="filled" fullWidth sx={textFieldStyles} style={{ marginBottom: '10px' }}>
+                <InputLabel>Country</InputLabel>
+                <Select>
+                  <MenuItem value="USA">USA</MenuItem>
+                  <MenuItem value="Canada">Canada</MenuItem>
+                  <MenuItem value="UK">UK</MenuItem>
+                  <MenuItem value="Australia">Australia</MenuItem>
+                  <MenuItem value="India">India</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12}>
+              <Button
+                type="submit"
+                variant="contained"
+                color="error"
+                fullWidth
+                style={{ marginTop: '1px' }}
+              >
+                Create Account
+              </Button>
+            </Grid>
+            <Grid item xs={12}>
+              <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '10px' }}>
+                <Typography sx={{ textAlign: 'left', marginLeft: '-150px' }}>
+                  Already have an account?
                 </Typography>
-                          <Grid item xs={12}>
-                              
-         <TextField         
-              type="text"
-              label="Name"
-              variant="filled"
-              fullWidth
-              style={{ marginBottom: '10px' }}
-         
-                             
-                                  sx={textFieldStyles} />
-               
-                             
-<br />
-                    <TextField         
-              type="email"
-              label="Email"
-              variant="filled"
-              fullWidth
-              style={{ marginBottom: '10px' }}
-         
-                             
-                                  sx={textFieldStyles} />
-                              
-                              <TextField         
-              type="password"
-              label="Password"
-              variant="filled"
-              fullWidth
-              style={{ marginBottom: '10px' }}
-         
-                             
-                                  sx={textFieldStyles} />
-                              
-                              <Grid item xs={12}>
-                                  <br />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              fullWidth
-              style={{ marginTop: '1px' }}
-            >
-           Create Acoount
-                                  </Button>
-                                  </Grid>
-
-                          </Grid>
-                          </Grid>
-                  </Grid>
-
-                  </form>
-              </Container>
+                <Button variant="text">Sign In</Button>
+              </Box>
+            </Grid>
+          </Grid>
+        </form>
+      </Container>
     </div>
-  )
-}
+  );
+};
 
-export default Signup
+export default Signup;

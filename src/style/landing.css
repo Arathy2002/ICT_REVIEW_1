@@ -1,160 +1,91 @@
-body,html{
-    background-size: cover;
-   display: flex;
-   align-items: center;
-   width:200vh ;
-   height:120vh ;
-   overflow-y: scroll auto;
-   overflow-x: hidden;
-
-
+body, html {
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  width: 200vh;
+  height: 120vh;
+  overflow-y: scroll auto;
+  overflow-x: hidden;
 }
 
-/* #background-video {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   min-width: 100%;
-   min-height: 100%;
-   width: auto;
-   height: auto;
-   z-index: -1;
-   transform: translate(-50%, -50%);
- } */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(218, 203, 203, 0.7);
+  z-index: 0;
+}
 
- .overlay {
-   position: fixed;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   background: rgba(218, 203, 203, 0.7); 
+.title {
+  margin-top: 100%;
+  position: relative;
+  z-index: 1;
+  font-family: 'Inter';
+  padding: 20px;
+  font-size: 2.5em;
+  font-weight: bold;
+  text-align: center;
+  background-image: linear-gradient(to right, rgb(253, 252, 252), rgb(255, 253, 253));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  margin-top: 200px;
+}
 
-   z-index: 0;
- }
- 
- .title {
-   /* margin-top: 100%; */
-   position: relative;
-   z-index: 1; 
-   font-family:'Inter';
-   padding: 20px;
-   font-size: 2.5em;
-   font-weight: bold;
-   text-align: center;
-   background-image: linear-gradient(to right, rgb(12, 0, 0), rgb(7, 0, 0));
-   -webkit-background-clip: text;
-   -webkit-text-fill-color: transparent;
-   background-clip: text;
-   color: transparent;
-   margin-top: 200px;
- }
- p{
-       font-size: 1.25rem;
-       /* line-height: 2rem; */
-       max-width: 60%;
-       padding-left: 250px;
-       font-family:'Inter';
-       
- }
- #btn{
-   z-index: 2; 
-   left:50px;
-   padding: 20px 20px;
-  border:1px groove rgb(40, 107, 108);
-  border-radius:20px;
-  color:rgb(131, 142, 143);
+p {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  max-width: 60%;
+  padding-left: 250px;
+  font-family: 'Inter';
+}
+
+#btn {
+  z-index: 2;
+  padding: 20px 20px;
+  border: 1px solid rgb(10, 9, 9);
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
   background-color: rgb(0, 0, 0);
   font-family: 'Neon Glow';
- box-shadow: 
-               0px 0px px  rgb(223, 10, 117),
-               0px 0px 30px rgb(223, 44, 142) inset,
-  
- }
+  box-shadow: 0px 0px 5px rgb(187, 185, 155), 0px 0px 30px rgb(65, 48, 4) inset;
+  position: relative;
+}
 
- #btn:hover{
-   box-shadow: 0px 0px 5px  rgb(194, 201, 200),
-               0px 0px 30px rgb(71, 5, 49),
-               0px 0px 90px rgb(209, 94, 190);
-   background-color: rgb(0, 0, 0);
-   color:white;
+#btn:hover {
+  box-shadow: 0px 0px 5px rgb(194, 201, 200), 0px 0px 30px rgb(219, 221, 195), 0px 0px 90px rgb(224, 220, 198);
+  background-color: rgb(0, 0, 0);
+  color: white;
+}
 
- }
+#btn1, #btn2, #btn3, #btn4 {
+  padding: 10px 20px;
+  font-size: 1em;
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 20px;
+  color: rgb(0, 0, 0);
+  background-color: transparent; /* Make the background transparent */
+  font-family: 'Neon Glow';
+  transition: box-shadow 0.3s ease-in-out;
+}
 
+#btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover {
+  background-color: rgb(12, 12, 11); /* Add background color on hover */
+  color: white;
+}
 
- #btn1{
-    position: absolute;
- top: 20px;
- right: 20px;
- padding: 5px 15px;
- font-size: 1em;
- background-color: #f19edf;
- color: rgb(15, 1, 6);
- border: none;
- border-radius: 20px;
- /* cursor: pointer; */
- z-index: 2; 
-   border:1px groove rgb(58, 8, 47);
-   border-radius:20px;
-   color:rgb(131, 142, 143);
-   background-color: rgb(0, 0, 0);
-   font-family: 'Neon Glow';
-  box-shadow: 
-                0px 0px px  rgb(128, 41, 102),
-                0px 0px 30px rgb(145, 6, 133) inset,
-   
-  }
+#btn1:active, #btn2:active, #btn3:active, #btn4:active {
+  box-shadow: 0px 0px 15px 5px rgba(199, 199, 146, 0.6); /* Yellow light effect */
+}
 
-  #btn1:hover{
-    box-shadow: 0px 0px 5px  rgb(95, 21, 83),
-                0px 0px 30px rgb(116, 40, 90),
-                0px 0px 90px rgb(190, 7, 108);
-    background-color: rgb(0, 0, 0);
-    color:white;
+.link {
+  text-decoration: none;
+  color: rgb(240, 235, 235);
+}
 
-  }
-  #btn2 {
-
-   padding: 5px 15px;
-   z-index: 2;
-   position: absolute;
-   top: 22px;
-   right: 190px; 
-   color: rgb(0, 6, 7);
-  }
-
-  #btn2:hover{
-
-   color:rgb(17, 5, 5);
-  }
-
-  #btn3 {
- 
-   padding: 5px 15px;
-   z-index: 2;
-   position: absolute;
-   top: 22px;
-   right: 110px; 
-   color: rgb(0, 6, 7);
-  }
-
-  #btn3:hover{
-
-   color:rgb(233, 215, 224);
-  }
-  
-
-  .card1{
-   color: rgb(14, 1, 1);
-
-  }
-
-  .link {
-   text-decoration: none;
-   color: rgb(250, 224, 237);
-  
- }
- 
- .link:hover {
-   color: rgb(236, 228, 228);
- }
+.link:hover {
+  color: rgb(206, 203, 164);
+}

@@ -16,13 +16,13 @@ const textFieldStyles = {
       borderBottomColor: 'rgba(255, 255, 255, 0.6)', 
     },
     '& .MuiFilledInput-underline:after': {
-      borderBottomColor: 'light blue', 
+      borderBottomColor: 'black', 
     },
     '& .MuiInputLabel-root': {
       color: 'white',
     },
     '& .MuiInputLabel-root.Mui-focused': {
-      color: 'dark blue',
+      color: 'white',
     },
   };
 const Login = () => {
@@ -56,6 +56,11 @@ const Login = () => {
                         borderRadius: '20px',
                         boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
                         backgroundColor: 'rgba(0, 0, 0, 0.1)',
+                        // backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/028/336/278/original/money-background-design-template-gold-coins-cartoon-illustration-investment-vector.jpg)',
+                        // backgroundSize: 'cover',
+                        // backgroundPosition: 'center',
+                        // backgroundRepeat: 'no-repeat',
+                        // position: 'relative',
                         color: 'white',
                         zIndex: '1',
                         backdropFilter: 'blur(100px) brightness(300%)' ,
@@ -128,7 +133,7 @@ const Login = () => {
             <Button
               type="submit"
               variant="contained"
-            //   color="error"
+             color="error"
               fullWidth
               style={{ marginTop: '1px' }}
             >
