@@ -1,4 +1,4 @@
-body, html {
+html {
   background-size: cover;
   display: flex;
   align-items: center;
@@ -6,6 +6,7 @@ body, html {
   height: 120vh;
   overflow-y: scroll auto;
   overflow-x: hidden;
+  color: lightyellow; /* Set default text color to light yellow */
 }
 
 .overlay {
@@ -31,7 +32,7 @@ body, html {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: transparent;
+  color: lightyellow; /* Set title text color to light yellow */
   margin-top: 200px;
 }
 
@@ -41,6 +42,7 @@ p {
   max-width: 60%;
   padding-left: 250px;
   font-family: 'Inter';
+  color: lightyellow; /* Set paragraph text color to light yellow */
 }
 
 #btn {
@@ -48,17 +50,17 @@ p {
   padding: 20px 20px;
   border: 1px solid rgb(10, 9, 9);
   border-radius: 20px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(0, 0, 0);
+  color: lightyellow; /* Set button text color to light yellow */
+  background-color: black;
   font-family: 'Neon Glow';
-  box-shadow: 0px 0px 5px rgb(187, 185, 155), 0px 0px 30px rgb(65, 48, 4) inset;
+  box-shadow: 0px 0px 5px rgb(187, 185, 155), 0px 0px 30px rgb(70, 66, 58) inset;
   position: relative;
 }
 
 #btn:hover {
   box-shadow: 0px 0px 5px rgb(194, 201, 200), 0px 0px 30px rgb(219, 221, 195), 0px 0px 90px rgb(224, 220, 198);
-  background-color: rgb(0, 0, 0);
-  color: white;
+  background-color: rgb(12, 12, 12);
+  color: lightpink;
 }
 
 #btn1, #btn2, #btn3, #btn4 {
@@ -66,26 +68,26 @@ p {
   font-size: 1em;
   border: 1px solid rgb(0, 0, 0);
   border-radius: 20px;
-  color: rgb(0, 0, 0);
-  background-color: transparent; /* Make the background transparent */
+  color: lightyellow; /* Set button text color to light yellow */
+  background-color: black; /* Set button background color to black */
   font-family: 'Neon Glow';
   transition: box-shadow 0.3s ease-in-out;
 }
 
 #btn1:hover, #btn2:hover, #btn3:hover, #btn4:hover {
-  background-color: rgb(12, 12, 11); /* Add background color on hover */
-  color: white;
+  background-color: black;
+  color: lightpink; /* Set button text color to light pink on hover */
 }
 
 #btn1:active, #btn2:active, #btn3:active, #btn4:active {
-  box-shadow: 0px 0px 15px 5px rgba(199, 199, 146, 0.6); /* Yellow light effect */
+  box-shadow: 0px 0px 15px 5px rgba(255, 182, 193, 0.6); /* Light pink light effect */
 }
 
 .link {
   text-decoration: none;
-  color: rgb(240, 235, 235);
+  color: lightyellow; /* Set link text color to light yellow */
 }
 
 .link:hover {
-  color: rgb(206, 203, 164);
+  color: white; /* Set link text color to light pink on hover */
 }

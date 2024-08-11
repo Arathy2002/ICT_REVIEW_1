@@ -1,125 +1,162 @@
 import React, { useState } from 'react';
-import { TextField, Button, Typography, Container, Grid, Box, InputLabel, Select, MenuItem, backdropClasses } from '@mui/material';
-// import video from '../assets/video.mp4';
-import FormControl from '@mui/material/FormControl';
+import axios from 'axios';
+import {
+  TextField,
+  Button,
+  Typography,
+  Container,
+  Grid,
+  Box,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl,
+} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 const textFieldStyles = {
-    '& .MuiFilledInput-root': {
+  '& .MuiFilledInput-root': {
+    backgroundColor: 'rgba(255, 255, 255, 0.4)',
+    '&:hover': {
       backgroundColor: 'rgba(255, 255, 255, 0.4)',
-      '&:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-      },
-      '&.Mui-focused': {
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-      },
     },
-    '& .MuiFilledInput-underline:before': {
-      borderBottomColor: 'rgba(255, 255, 255, 0.6)', 
+    '&.Mui-focused': {
+      backgroundColor: 'rgba(255, 255, 255, 0.5)',
     },
-    '& .MuiFilledInput-underline:after': {
-      borderBottomColor: 'black', 
-    },
-    '& .MuiInputLabel-root': {
-      color: 'white',
-    },
-    '& .MuiInputLabel-root.Mui-focused': {
-      color: 'white',
-    },
-  };
+  },
+  '& .MuiFilledInput-underline:before': {
+    borderBottomColor: 'rgba(255, 255, 255, 0.6)',
+  },
+  '& .MuiFilledInput-underline:after': {
+    borderBottomColor: 'black',
+  },
+  '& .MuiInputLabel-root': {
+    color: 'white',
+  },
+  '& .MuiInputLabel-root.Mui-focused': {
+    color: 'white',
+  },
+};
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [role, setRole] = useState('user'); // Default to 'user'
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email === 'user@example.com' && password === 'password') {
-      alert('Login successful!');
-      
-    } else {
-      setError('Invalid email or password');
+    setError(''); // Clear previous errors
+
+    if (!email || !password) {
+      setError('Email and password are required');
+      return;
+    }
+
+    const endpoint = role === 'admin' ? 'http://localhost:3002/loginadmin' : 'http://localhost:3002/login';
+
+    try {
+      const response = await axios.post(endpoint, { email, password });
+      const data = response.data;
+      console.log(data);
+      if (data.status === 'success') {
+        alert('Login successful!');
+        if (role === 'admin') {
+          navigate('/admin', {
+            state: { email: data.user.email, name: data.user.name, id: data.user.id },
+          });
+        } else {
+          navigate('/userdashboard', {
+            state: { email: data.user.email, name: data.user.name, id: data.user.id },
+          });
+        }
+      } else {
+        setError(data.message || 'Invalid credentials');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      if (error.response) {
+        setError('An error occurred');
+      } else if (error.request) {
+        setError('No response received from server');
+      } else {
+        setError('Error:', error.message);
+      }
     }
   };
 
-    return (
-        <div>
-        {/* <video autoPlay muted loop id="background-video">
-        <source src={video}type="video/mp4" />
-        Your browser does not support the video tag.
-            </video>
-            <div className="overlay"></div>  */}
-    <Container style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center',paddingBottom:'20px'}} >
+  return (
+    <Container
+      style={{
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: '20px',
+      }}
+    >
       <form
-                    style={{
-                        width: '100%',
-                        maxWidth: '400px',
-                        padding: '30px',
-                        borderRadius: '20px',
-                        boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
-                        backgroundColor: 'rgba(0, 0, 0, 0.1)',
-                        // backgroundImage: 'url(https://static.vecteezy.com/system/resources/previews/028/336/278/original/money-background-design-template-gold-coins-cartoon-illustration-investment-vector.jpg)',
-                        // backgroundSize: 'cover',
-                        // backgroundPosition: 'center',
-                        // backgroundRepeat: 'no-repeat',
-                        // position: 'relative',
-                        color: 'white',
-                        zIndex: '1',
-                        backdropFilter: 'blur(100px) brightness(300%)' ,
-                    
+        style={{
+          width: '100%',
+          maxWidth: '400px',
+          padding: '30px',
+          borderRadius: '20px',
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          color: 'white',
+          zIndex: '1',
+          backdropFilter: 'blur(100px) brightness(300%)',
         }}
         onSubmit={handleSubmit}
-          >
-            
+      >
         <Grid container spacing={2} justifyContent="center">
           <Grid item xs={12}>
             <Typography variant="h3" align="center" gutterBottom>
-              Sign In
-                </Typography>
-
-                <Grid item xs={12}>
-                  
-                <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label" sx={{color: 'white'}}>Role</InputLabel>
-  <Select
-    labelId="demo-simple-select-label"
-    id="demo-simple-select"
-    // value={age}
-    label="Role"
-                      // onChange={handleChange}
-                      sx={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.4)',
-                        color:'white'
-                      }}
-  >
-    <MenuItem value={'admin'} sx={{}}>Admin</MenuItem>
-    <MenuItem value={'user'}>User</MenuItem>
-  
-  </Select>
-      </FormControl>
-                  </Grid>
+              LOGIN
+            </Typography>
           </Grid>
           <Grid item xs={12}>
-                            <TextField
-                                
+            <FormControl fullWidth>
+              <InputLabel id="role-select-label" sx={{ color: 'white' }}>
+                Role
+              </InputLabel>
+              <Select
+                labelId="role-select-label"
+                id="role-select"
+                value={role}
+                label="Role"
+                onChange={(e) => setRole(e.target.value)}
+                sx={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.4)',
+                  color: 'white',
+                }}
+              >
+                <MenuItem value="admin">Admin</MenuItem>
+                <MenuItem value="user">User</MenuItem>
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
               type="email"
               label="Email"
               variant="filled"
               fullWidth
-              style={{ marginBottom: '10px' }}
               value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                sx={textFieldStyles}
+              onChange={(e) => setEmail(e.target.value)}
+              sx={textFieldStyles}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-                                type="password"
-                                label="Password"
-                                variant="filled"
-                                fullWidth
-                                style={{ marginBottom: '10px' }}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                sx={textFieldStyles}
+              type="password"
+              label="Password"
+              variant="filled"
+              fullWidth
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              sx={textFieldStyles}
             />
           </Grid>
           <Grid item xs={12}>
@@ -133,27 +170,41 @@ const Login = () => {
             <Button
               type="submit"
               variant="contained"
-             color="error"
               fullWidth
-              style={{ marginTop: '1px' }}
+              sx={{
+                backgroundColor: '#FFFFE0', // Light yellow color
+                color: 'black',
+                '&:hover': {
+                  backgroundColor: '#FFFACD', // Lighter yellow on hover
+                },
+              }}
             >
               Login
-                            </Button>
-                       
-                    </Grid>
-                        <Grid item xs={12}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '10 px' }}>
-              <Typography sx={{ textAlign: 'left', marginLeft: '-150px' }}>
-                                    Don't have an account?
-                                    </Typography>
-                                    <Button variant="text" >Sign up</Button>
-                                    </Box>
-            
-            </Grid>
+            </Button>
           </Grid>
+          <Grid item xs={12}>
+            <Box sx={{ display: 'flex', alignItems: 'center', marginTop: '10px', justifyContent: 'center' }}>
+              <Typography sx={{ marginRight: '10px' }}>Don't have an account?</Typography>
+              <Button
+                variant="contained"
+                size="medium"
+                sx={{
+                  whiteSpace: 'nowrap', // Prevents text wrapping
+                  backgroundColor: '#FFFFE0', // Light yellow color
+                  color: 'black',
+                  '&:hover': {
+                    backgroundColor: '#FFFACD', // Lighter yellow on hover
+                  },
+                }}
+                onClick={() => navigate('/signup')}
+              >
+                Sign up
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </form>
-            </Container>
-            </div>
+    </Container>
   );
 };
 

@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Container, Grid, Typography, TextField, Card, CardContent, List, ListItem, ListItemText } from '@mui/material';
-import { Home, Person, Receipt } from '@mui/icons-material'; // Importing icons from Material-UI
+import React from 'react';
+import { Button, Avatar, Typography, Card } from '@mui/material';
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import styled from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-// Styled components for Sidebar and Buttons
 const Sidebar = styled.div`
   width: 240px;
   height: 100vh;
-  background-color: #000; /* Black background */
-  color: #fff; /* White text */
+  background-color: rgba(0, 0, 0, 0.9);
+  color: #fff;
   position: fixed;
   top: 0;
   left: 0;
@@ -16,22 +16,17 @@ const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  background-image: url('background-image: url("https://img.freepik.com/premium-photo/red-minimalist-tech-finance-thumbnail-background-9_769134-342.jpg"); ');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 `;
 
 const SidebarButton = styled(Button)`
   width: 100%;
-  margin-bottom: 10px;
-  color: #fff; /* White text */
-  background-color: #f1c40f; /* Yellow */
-  background-image: url("https://img.freepik.com/premium-photo/red-minimalist-tech-finance-thumbnail-background-9_769134-342.jpg"); 
+  margin-bottom: 15px;
+  color: #000 !important; /* Black text */
+  background-color: #fff !important; /* White background */
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20210427/pngtree-ash-color-texture-paper-image_669420.jpg");
   text-align: left;
   &:hover {
-    background-color: #f39c12; /* Darker yellow on hover */
-    background-image: url("https://img.freepik.com/premium-photo/red-minimalist-tech-finance-thumbnail-background-9_769134-342.jpg"); 
+    background-color: #FFFDD0 !important; /* Light grey background on hover */
   }
   display: flex;
   align-items: center;
@@ -43,175 +38,100 @@ const IconContainer = styled.div`
   margin-right: 15px;
 `;
 
-const ContentContainer = styled(Container)`
-  margin-left: 260px; /* Offset for the sidebar */
+const ContentContainer = styled.div`
+  margin-left: 260px;
   padding: 20px;
   min-height: 100vh;
-  background-color: #AAA; /* Yellow background for content */
-  background-image: url("https://www.shutterstock.com/image-illustration/thailand-stock-exchange-streaming-trade-260nw-1630926589.jpg"); 
+  background-color: rgba(0, 0, 0, 0.9);
+  background-image: url("https://img.freepik.com/premium-vector/hand-painted-watercolor-abstract-background_889452-27198.jpg");
   background-size: cover;
-  color: #fff; /* White text */
+  color: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 `;
 
-const StyledCard = styled(Card)`
-  margin: 20px;
-  max-width: 600px;
-  width: 100%;
-  background-color: #AAA; /* Darker grey for the card */
-  background-image: url("https://www.shutterstock.com/image-illustration/financial-chart-down-trend-line-260nw-1701336523.jpg"); 
+const AdminProfileContainer = styled(Card)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fce4ec; /* Light pink background for profile section */
+  background-image: url("https://png.pngtree.com/background/20220715/original/pngtree-light-blue-background-picture-picture-image_1626628.jpg");
   background-size: cover;
-  color: #fff; /* White text */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Stronger shadow for contrast */
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 370px; /* Adjust width */
+  margin-top: 20px; /* Margin to space from heading */
+`;
+
+const AdminAvatar = styled(Avatar)`
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  background-image: url('https://i.pinimg.com/736x/f5/5f/a1/f55fa19b37cc114e08b7ac757a1e13c7.jpg'); /* Replace with actual URL */
+  background-size: cover;
+  background-position: center;
+`;
+
+const DashboardHeading = styled(Typography)`
+  font-size: 2rem;
+  font-weight: bold;
+  color: #000; /* Black font color */
+  margin: 25px;
+  text-align: center;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 360px;
+  padding: 10px;
 `;
 
 const Admin = () => {
-  const [activeSection, setActiveSection] = useState('user');
-  const [users, setUsers] = useState([]);
-  const [expenses, setExpenses] = useState([]);
-  const [newUser, setNewUser] = useState({ name: '', email: '' });
-  const [newExpense, setNewExpense] = useState({ description: '', amount: '' });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { email, id, name } = location.state || {};
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      // Mock API call
-      setUsers([{ id: 1, name: 'John Doe', email: 'john@example.com' }]);
-    };
-
-    const fetchExpenses = async () => {
-      // Mock API call
-      setExpenses([{ id: 1, description: 'Office Supplies', amount: '$200' }]);
-    };
-
-    fetchUsers();
-    fetchExpenses();
-  }, []);
-
-  const handleAddUser = () => {
-    setUsers([...users, { ...newUser, id: users.length + 1 }]);
-    setNewUser({ name: '', email: '' });
-  };
-
-  const handleAddExpense = () => {
-    setExpenses([...expenses, { ...newExpense, id: expenses.length + 1 }]);
-    setNewExpense({ description: '', amount: '' });
+  const handleLogout = () => {
+    navigate('/login');
   };
 
   return (
     <>
       <Sidebar>
-        <SidebarButton variant="contained" onClick={() => setActiveSection('user')}>
-          <IconContainer><Person /></IconContainer>
+        <br /><br />
+        <SidebarButton variant="contained" onClick={() => navigate('/admin/user-management')}>
+          <IconContainer>
+            {/* Removed the PersonIcon */}
+          </IconContainer>
           User Management
         </SidebarButton>
-        <SidebarButton variant="contained" onClick={() => setActiveSection('expense')}>
-          <IconContainer><Receipt /></IconContainer>
-          Expense Management
+        <br /><br />
+        <SidebarButton variant="contained" onClick={handleLogout}>
+          <IconContainer>
+            <ExitToAppIcon />
+          </IconContainer>
+          Logout
         </SidebarButton>
       </Sidebar>
-
       <ContentContainer>
-        <Typography variant="h4" gutterBottom>
+        <DashboardHeading>
           Admin Dashboard
-        </Typography>
-        <Grid container spacing={3} justifyContent="center">
-          {activeSection === 'user' && (
-            <Grid item xs={12} sm={8} md={6}>
-              <StyledCard>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    User Management
-                  </Typography>
-                  <TextField
-                    label="Name"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={newUser.name}
-                    onChange={(e) => setNewUser({ ...newUser, name: e.target.value })}
-                    InputProps={{ style: { color: '#AAA' } }} // TextField text color
-                    InputLabelProps={{ style: { color: '#AAA' } }} // TextField label color
-                  />
-                  <TextField
-                    label="Email"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={newUser.email}
-                    onChange={(e) => setNewUser({ ...newUser, email: e.target.value })}
-                    InputProps={{ style: { color: '#AAA' } }} // TextField text color
-                    InputLabelProps={{ style: { color: '#AAA' } }} // TextField label color
-                  />
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleAddUser}
-                    fullWidth
-                  >
-                    Add User
-                  </Button>
-                  <List>
-                    {users.map((user) => (
-                      <ListItem key={user.id}>
-                        <ListItemText primary={`${user.name} (${user.email})`} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </StyledCard>
-            </Grid>
-          )}
-
-          {activeSection === 'expense' && (
-            <Grid item xs={12} sm={8} md={6}>
-              <StyledCard>
-                <CardContent>
-                  <Typography variant="h6" gutterBottom>
-                    Expense Management
-                  </Typography>
-                  <TextField
-                    label="Description"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={newExpense.description}
-                    onChange={(e) => setNewExpense({ ...newExpense, description: e.target.value })}
-                    InputProps={{ style: { color: '#AAA' } }} // TextField text color
-                    InputLabelProps={{ style: { color: '#AAA' } }} // TextField label color
-                  />
-                  <TextField
-                    label="Amount"
-                    variant="outlined"
-                    fullWidth
-                    margin="normal"
-                    value={newExpense.amount}
-                    onChange={(e) => setNewExpense({ ...newExpense, amount: e.target.value })}
-                    InputProps={{ style: { color: '#AAA' } }} // TextField text color
-                    InputLabelProps={{ style: { color: '#AAA' } }} // TextField label color
-                  />
-                  <Button
-                    variant="contained"
-                    color="error"
-                    onClick={handleAddExpense}
-                    fullWidth
-                  >
-                    Add Expense
-                  </Button>
-                  <List>
-                    {expenses.map((expense) => (
-                      <ListItem key={expense.id}>
-                        <ListItemText primary={`${expense.description}: ${expense.amount}`} />
-                      </ListItem>
-                    ))}
-                  </List>
-                </CardContent>
-              </StyledCard>
-            </Grid>
-          )}
-        </Grid>
+        </DashboardHeading>
+        <AdminProfileContainer>
+          <AdminAvatar />
+          <Typography variant="h5" gutterBottom>
+            Admin
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            {name}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            {email}
+          </Typography>
+        </AdminProfileContainer>
       </ContentContainer>
     </>
   );

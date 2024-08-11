@@ -43,7 +43,7 @@ const Landing = () => {
       </div>
       <Container>
         <Button id='btn'>
-          <Link to='/signup' className='link'>Get Started</Link>
+          <Link to='/signup' className='link'>Sign Up</Link>
         </Button>
       </Container>
       <ButtonContainer>
@@ -56,12 +56,10 @@ const Landing = () => {
         <Button id='btn3'>
           <Link to='/about' className='link'>About</Link>
         </Button>
-        <Button id='btn4'>
-          <Link to='/admin' className='link'>Admin</Link>
-        </Button>
-        <Button id='btn4'>
+        
+        {/* <Button id='btn4'>
           <Link to='/admin' className='link'>User</Link>
-        </Button>
+        </Button> */}
       </ButtonContainer>
     </div>
   );
